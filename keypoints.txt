@@ -1,0 +1,27 @@
+Overview:
+
+This diagram represents the high-level architecture of our Geospatial Python Runtime system. It illustrates the interaction between various components, from user requests to the processing and storage of geospatial data.
+Components:
+
+User Requests: Users send HTTP requests containing geospatial data, such as geometry boundaries.
+API Gateway: Acts as the entry point for all user requests. It routes these requests to the appropriate services, handles authentication, rate limiting, and other API management tasks.
+Python Runtime Environment: This consists of Docker containers running Python functions. Each container has GDAL and other required libraries installed. The containers are managed by Kubernetes for scalability and orchestration.
+Function Management Service: Manages user-defined functions (UDFs). It handles the creation, deletion, and updates of UDFs, ensuring each function runs in an isolated environment.
+Storage: This is the persistent storage for large datasets (e.g., AWS S3, Google Cloud Storage). It stores input data, intermediate results, and final outputs.
+Results: Processed data is returned to the user via the API Gateway. This can include image tiles, analysis results, or other geospatial data.
+Flow:
+
+Users send requests to the API Gateway.
+The API Gateway routes these requests to either the Python Runtime Environment for processing or the Function Management Service for managing UDFs.
+The Python Runtime Environment processes the data and interacts with the Storage for saving datasets.
+Processed results are stored and then sent back to the user through the API Gateway.
+Key Points:
+
+Scalability: The use of Kubernetes ensures that our system can scale according to demand.
+Isolation: Each user-defined function runs in an isolated environment, enhancing security and reliability.
+Flexibility: The system can handle various geospatial data processing tasks and manage large datasets effectively.
+
+
+
+cli:
+user separation-login, logout
